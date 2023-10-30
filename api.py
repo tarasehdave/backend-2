@@ -353,4 +353,4 @@ api.add_resource(Grains, "/grains")
 
 # main
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8356)
+    app.run(host="0.0.0.0", port=5020)
