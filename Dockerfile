@@ -12,6 +12,6 @@ COPY . .
 
 RUN pipenv install --deploy --ignore-pipfile
 
-EXPOSE 5010
+EXPOSE 8356
 
 CMD ["pipenv", "run", "python", "api.py"]
