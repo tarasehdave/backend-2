@@ -1,11 +1,24 @@
-FROM docker.io/python:3.10
-WORKDIR /
-# --- [Install python and pip] ---
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y python3 python3-pip git
-COPY . /
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install gunicorn
-ENV GUNICORN_CMD_ARGS="--workers=1 --bind=0.0.0.0:5020"
+FROM python:3.8
+
+
+RUN pip3 install pipenv
+
+
+ENV PROJECT_DIR /Users/Tara/Documents/Code/backend-2
+
+
+WORKDIR ${PROJECT_DIR}
+
+
+COPY Pipfile .
+COPY Pipfile.lock .
+COPY . .
+
+
+RUN pipenv install --deploy --ignore-pipfile
+
+
 EXPOSE 5020
-CMD [ "gunicorn", "main:app" ]
+
+
+CMD ["pipenv", "run", "python", "api.py"]
